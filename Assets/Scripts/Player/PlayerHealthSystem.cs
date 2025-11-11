@@ -20,13 +20,13 @@ public class PlayerHealthSystem : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-        _currentHealth -= damage;
+        _currentHealth = Mathf.Max(0, _currentHealth - damage);
         _healthBar.value = _currentHealth;
     }
 	
 	public void GetHealing(HealingSystem hs)
 	{
-		_currentHealth = Mathf.Max(_maxHealth, _currentHealth + hs.Value);
+		_currentHealth = Mathf.Min(_maxHealth, _currentHealth + hs.Value);
 		_healthBar.value = _currentHealth;
 	}
 
