@@ -52,15 +52,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void IncreaseIndex()
-    {
-		if(_currentIndex + 1 < _enemyPrefabs.Length)
-        	_currentIndex++;
-    }
-
-    public void DecreaseIndex()
-    {
-		if(_currentIndex - 1 > -1)
-    	    _currentIndex--;
-    }
+	public void SetIndex(int value){
+       _currentIndex = Mathf.Min(Mathf.Abs(value / 4), 1);
+	}
 }
