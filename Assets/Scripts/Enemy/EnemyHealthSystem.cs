@@ -17,6 +17,7 @@ public class EnemyHealthSystem : MonoBehaviour
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
+            this.GetComponentInParent<EnemyKarma>().ChangeKarma();
             Destroy(gameObject);
             Instantiate(expPrefub, transform.position, Quaternion.identity);
         }

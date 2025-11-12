@@ -3,7 +3,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyPrefab;
+    private GameObject[] _enemyPrefabs;
+
+    private int _currentIndex = 0;
     [SerializeField]
     private int _maxEnemies = 10;
     [SerializeField]
@@ -22,26 +24,36 @@ public class EnemySpawner : MonoBehaviour
         {
             _currentEnemies++;
             Vector2 randomPoint = new Vector2(Random.Range(0f, _cameraWidth), Random.Range(0f, _cameraWidth));
-
+            var enemyPrefab = _enemyPrefabs[_currentIndex];
             switch (Random.Range(0, 4))
             {
                 case 0:
                     randomPoint.x += _cameraWidth; 
-                    Instantiate(_enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
                     break;
                 case 1:
                     randomPoint.x -= _cameraWidth;
-                    Instantiate(_enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
                     break;
                 case 2:
                     randomPoint.y += _cameraWidth;
-                    Instantiate(_enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
                     break;
                 case 3:
                     randomPoint.y -= _cameraWidth;
-                    Instantiate(_enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
                     break;
             }
         }
+    }
+
+    public void IncreaseIndex()
+    {
+        _currentIndex++;
+    }
+
+    public void DecreaseIndex()
+    {
+        _currentIndex--;
     }
 }

@@ -42,4 +42,9 @@ public class PlayerAttack : MonoBehaviour
 			_rangedAllowed = true;
 		}
     }
+
+    public void IncreaseDamage()
+    {
+        _attackDamage += 10;
+    }
 }

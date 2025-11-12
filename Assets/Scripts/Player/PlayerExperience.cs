@@ -12,6 +12,8 @@ public class PlayerExperience : MonoBehaviour
     [SerializeField]
     private int _currentLevel;
 
+	[SerializeField] private GameObject _player;
+
     [SerializeField] private int _currentExp;
 
     [SerializeField] private Slider _expBar;
@@ -33,6 +35,8 @@ public class PlayerExperience : MonoBehaviour
             _currentExp -= _levelBorder;
             _levelBorder *= 2;
             _currentLevel++;
+            this.GetComponentInParent<PlayerAttack>().IncreaseDamage();
+            transform.parent.GetChild(2).GetComponent<PlayerHealthSystem>().IncreaseMaxHealth();
             _expBar.maxValue = _levelBorder;
             if (_currentLevel == _maxLevel)
             {

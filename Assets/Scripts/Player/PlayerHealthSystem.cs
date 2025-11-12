@@ -30,4 +30,10 @@ public class PlayerHealthSystem : MonoBehaviour
 		_healthBar.value = _currentHealth;
 	}
 
+	public void IncreaseMaxHealth()
+	{
+		_maxHealth += 50;
+		_healthBar.maxValue = _maxHealth;
+	}
+
 }
