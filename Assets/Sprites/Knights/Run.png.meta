@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 29e3d7014720f134a908aff0b14ff5e6
+guid: 8cdc4d34504e22fd9af6220182e68f61
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,37 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead_0
+      name: Run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb131e9699bfbc97aab50754e172c0b4
-      internalID: -276936790
+      spriteID: e9a96cfc7b877ac92a6146109b07bc3c
+      internalID: -23175062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_1
+      name: Run_1
       rect:
         serializedVersion: 2
         x: 128
@@ -158,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2ba00b27ea813d00ad2b5ac267d540e
-      internalID: -1222399460
+      spriteID: 43012283745b7ef9f91771ebcd091c62
+      internalID: 1218345828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_2
+      name: Run_2
       rect:
         serializedVersion: 2
         x: 256
@@ -179,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 481523ec71c95df40ac82fc5b1eb2c29
-      internalID: -1494175072
+      spriteID: 0878a4e038645aca1854f39aa0762538
+      internalID: 1360563172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_3
+      name: Run_3
       rect:
         serializedVersion: 2
         x: 384
@@ -200,8 +174,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b3602ec14b66fd23917da5eb9938126
-      internalID: -652204421
+      spriteID: 7668e79d592596f54b7092c0c0b535c1
+      internalID: 307358838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ba331361aabd42e9d1b8068b1a686e
+      internalID: 2122018091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 467834a402f1133b5b38e6b818876385
+      internalID: -1239584548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ca81e08ba7be53b90236ac6abba712
+      internalID: 930688061
       vertices: []
       indices: 
       edges: []
@@ -217,10 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dead_0: -276936790
-      Dead_1: -1222399460
-      Dead_2: -1494175072
-      Dead_3: -652204421
+      Run_0: -23175062
+      Run_1: 1218345828
+      Run_2: 1360563172
+      Run_3: 307358838
+      Run_4: 2122018091
+      Run_5: -1239584548
+      Run_6: 930688061
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
