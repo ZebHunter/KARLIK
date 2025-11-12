@@ -3,6 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public class SceneSequence
+{
+    // Загрузка обычных сцен
+    public static void LoadScene(int index)
+    {
+        SceneManager.LoadScene("Scene" + index, LoadSceneMode.Single);
+    }
+
+    // Загрузка сцены паузы поверх текущей
+    public static void LoadPauseSceneAdditive()
+    {
+        SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+    }
+
+    // Возврат к предыдущей сцене
+    public static void UnloadPauseScene()
+    {
+        SceneManager.UnloadSceneAsync("Pause");
+    }
+}
+
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame(){
@@ -20,11 +41,11 @@ public class MainMenu : MonoBehaviour
 
     public void ResumeGame(){
         Time.timeScale = 1;
-		SceneManager.LoadScene(1);
+		SceneSequence.UnloadPauseScene();
 	}
 
     public void PauseGame(){
         Time.timeScale = 0;
-		SceneManager.LoadScene(4);
+		SceneSequence.LoadPauseSceneAdditive();
 	}
 }

@@ -44,13 +44,13 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (SceneManager.GetActiveScene().buildIndex == 4) {
+            if (SceneManager.GetSceneByName("Pause").isLoaded) {
                 Time.timeScale = 1;
-		        SceneManager.LoadScene(1);
+		        SceneSequence.UnloadPauseScene();
             } else if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 Time.timeScale = 0;
-		        SceneManager.LoadScene(4);
+		        SceneSequence.LoadPauseSceneAdditive();
             }
         }
     }

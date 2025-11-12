@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
             if (lifeTime > 0){
                 lifeTime -= 1;
             } else {
-                SceneManager.LoadScene(3);
+                SceneSequence.LoadScene(3);
             }
 
             gameTime = 0;
