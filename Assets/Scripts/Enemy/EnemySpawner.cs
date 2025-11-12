@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void IncreaseIndex()
     {
-		if(_currentIndex + 1 < _enemyPrefuds.Length)
+		if(_currentIndex + 1 < _enemyPrefabs.Length)
         	_currentIndex++;
     }
 
