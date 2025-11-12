@@ -20,6 +20,7 @@ public class EnemyHealthSystem : MonoBehaviour
             this.GetComponentInParent<EnemyKarma>().ChangeKarma();
             Destroy(gameObject);
             Instantiate(expPrefub, transform.position, Quaternion.identity);
+			GameObject.Find("KarmaSystem").GetComponent<KarmaSystem>().DeadBomsh();
         }
     }
 }

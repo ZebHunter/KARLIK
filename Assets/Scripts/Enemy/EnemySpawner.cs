@@ -12,13 +12,18 @@ public class EnemySpawner : MonoBehaviour
     private Transform _cameraTransform;
 
     private int _currentEnemies = 0;
+	public void Dead()
+	{
+		_currentEnemies--;
+		Update();
+	}
     private float _cameraWidth;
 
-    void Start()
+    public void Start()
     {
         _cameraWidth = _cameraTransform.GetComponent<Camera>().orthographicSize * _cameraTransform.GetComponent<Camera>().aspect;
     }
-    void Update()
+    public void Update()
     {
         if (_currentEnemies < _maxEnemies)
         {
@@ -49,11 +54,13 @@ public class EnemySpawner : MonoBehaviour
 
     public void IncreaseIndex()
     {
-        _currentIndex++;
+		if(_currentIndex + 1 < _enemyPrefuds.Length)
+        	_currentIndex++;
     }
 
     public void DecreaseIndex()
     {
-        _currentIndex--;
+		if(_currentIndex - 1 > -1)
+    	    _currentIndex--;
     }
 }

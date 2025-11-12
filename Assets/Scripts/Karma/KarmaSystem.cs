@@ -10,6 +10,7 @@ public class KarmaSystem : MonoBehaviour
     void Start()
     {
         _currentCount = 0;
+		_enemySpawner.GetComponent<EnemySpawner>().Start();
     }
 
     public void GetKarmaChange(int change)
@@ -29,4 +30,14 @@ public class KarmaSystem : MonoBehaviour
             return;
         }
     }
+	public void DeadBomsh()
+	{
+		_enemySpawner.GetComponent<EnemySpawner>().Dead();
+	}
+
+	public void Update()
+	{
+		_enemySpawner.GetComponent<EnemySpawner>().Update();
+	}
+
 }
