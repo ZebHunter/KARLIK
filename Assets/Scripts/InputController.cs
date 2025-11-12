@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class InputController : MonoBehaviour
 {
     public InputController()
@@ -39,6 +41,17 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S))
         {
             EventBus.Instance.Invoke(new SKeyReleasedSignal());
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 4) {
+                Time.timeScale = 1;
+		        SceneManager.LoadScene(1);
+            } else if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                Time.timeScale = 0;
+		        SceneManager.LoadScene(4);
+            }
         }
     }
 }
