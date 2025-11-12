@@ -12,7 +12,7 @@ public class KarmaSystem : MonoBehaviour
 
     public void GetKarmaChange(int change)
     {
-        _currentCount += change;
+        _currentCount =Mathf.Max(0, _currentCount + change);
 		_enemySpawner.GetComponent<EnemySpawner>().SetIndex(_currentCount);
     }
 	public void DeadBomsh()

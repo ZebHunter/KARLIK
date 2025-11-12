@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 3282313864318870367}
   - component: {fileID: -2638942005265625621}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Scelethon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,4 +454,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81cbe23096c946148123ea952e73d92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _karmaPoints: 1
+  _karmaPoints: -10

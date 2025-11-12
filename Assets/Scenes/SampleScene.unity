@@ -466,7 +466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 0.000011444}
+  m_AnchoredPosition: {x: 5, y: 0.000011444092}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490529127
@@ -1136,12 +1136,24 @@ PrefabInstance:
       objectReference: {fileID: 843925373}
     - target: {fileID: 8508422556698695958, guid: 0b8fda431ec07e7b6a668db7f562322c, type: 3}
       propertyPath: _enemyPrefabs.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8508422556698695958, guid: 0b8fda431ec07e7b6a668db7f562322c, type: 3}
+      propertyPath: _enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6795194674777499025, guid: 379b7a2c3aede56f4bb02a78cb0e9037, type: 3}
     - target: {fileID: 8508422556698695958, guid: 0b8fda431ec07e7b6a668db7f562322c, type: 3}
       propertyPath: _enemyPrefabs.Array.data[1]
       value: 
+      objectReference: {fileID: 6795194674777499025, guid: a629fd265ee84db349882a6944c2affa, type: 3}
+    - target: {fileID: 8508422556698695958, guid: 0b8fda431ec07e7b6a668db7f562322c, type: 3}
+      propertyPath: _enemyPrefabs.Array.data[2]
+      value: 
       objectReference: {fileID: 6795194674777499025, guid: 326f230f14612a47e8c32415a91f72ea, type: 3}
+    - target: {fileID: 8508422556698695958, guid: 0b8fda431ec07e7b6a668db7f562322c, type: 3}
+      propertyPath: _enemyPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6795194674777499025, guid: 306ef678b2dab844dbe32ef7e5794cbb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

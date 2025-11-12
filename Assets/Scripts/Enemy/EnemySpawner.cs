@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int _currentIndex = 0;
     [SerializeField]
-    private int _maxEnemies = 10;
+    private int _maxEnemies = 15;
     [SerializeField]
     private Transform _cameraTransform;
 
@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void Start()
     {
+		_currentIndex = _enemyPrefabs.Length - 1;
         _cameraWidth = _cameraTransform.GetComponent<Camera>().orthographicSize * _cameraTransform.GetComponent<Camera>().aspect;
     }
     public void Update()
@@ -53,6 +54,12 @@ public class EnemySpawner : MonoBehaviour
     }
 
 	public void SetIndex(int value){
-       _currentIndex = Mathf.Min(Mathf.Abs(value / 4), 1);
-	}
+       var newIndex = Mathf.Min(value / 25, 3);
+       if (_currentIndex < newIndex)
+           _maxEnemies = Mathf.Max(_maxEnemies - 5, 10);
+       if (_currentIndex > newIndex)
+           _maxEnemies = Mathf.Min(_maxEnemies + 5, 40);
+		_currentIndex = newIndex;
+        Update();
+    }
 }
