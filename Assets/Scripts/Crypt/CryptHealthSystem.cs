@@ -4,7 +4,7 @@ public class CryptHealthSystem : MonoBehaviour
     [SerializeField]
     private int _maxHealth = 100;
     private int _currentHealth;
-    private int lastKarma = 100;
+    private int _previousEnemyLevel = 3;
     void Start()
     {
         _currentHealth = _maxHealth;
@@ -13,30 +13,16 @@ public class CryptHealthSystem : MonoBehaviour
 
     public void OnKarmaChanged(KarmaChangedSignal signal)
     {
-        if (signal.Karma < 75 && lastKarma >= 75)
-        {
-            lastKarma = signal.Karma;
-            if (Random.Range(0,3) == 0)
-            {
-                Destroy(transform.parent.gameObject);
-            }
-        } else if (signal.Karma < 50 && lastKarma >= 50)
-        {
-            lastKarma = signal.Karma;
-            if (Random.Range(0,3) == 0)
-            {
-                Destroy(transform.parent.gameObject);
-            }
-        } else if (signal.Karma < 25 && lastKarma >= 25)
-        {
-            lastKarma = signal.Karma;
-            if (Random.Range(0,3) == 0)
-            {
-                Destroy(transform.parent.gameObject);
-            }
-        } else if (signal.Karma == 0){
+        if(signal.Karma == 0){
             Destroy(transform.parent.gameObject);
+            return;
         }
+        for(int i = 0; i < _previousEnemyLevel - signal.NewEnemyLevel; ++i){
+            if(Random.Range(0,3) == 0){
+                Destroy(transform.parent.gameObject);
+            }
+        }
+        _previousEnemyLevel = signal.NewEnemyLevel;
     }
 
     public void GetDamage(int damage)

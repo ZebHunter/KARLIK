@@ -20,7 +20,6 @@ public class KarmaSystem : MonoBehaviour
     public void GetKarmaChange(int change)
     {
         _currentCount = Mathf.Max(0, _currentCount + change);
-		_enemySpawner.GetComponent<EnemySpawner>().SetIndex(_currentCount);
         EventBus.Instance.Invoke(new KarmaChangedSignal(_currentCount));
     }
 

@@ -35,7 +35,6 @@ public class EventBus
                 _signalCallbacks.Remove(key);
         } else
         {
-            UnityEngine.Debug.LogWarning($"[EventBus] Tried to unsubscribe from {key}, but event not found.");
         }
     }
     
@@ -44,7 +43,8 @@ public class EventBus
         string key = typeof(T).Name;
         if (_signalCallbacks.TryGetValue(key, out var list))
         {
-            foreach (var (callback, filter) in list)
+            var listCopy = new List<(Delegate callback, Delegate filter)>(list);
+            foreach (var (callback, filter) in listCopy)
             {
                 var typedCallback = callback as Action<T>;
                 var typedFilter = filter as Func<T, bool>;

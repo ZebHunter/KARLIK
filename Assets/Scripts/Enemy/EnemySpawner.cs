@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int _currentIndex = 0;
     private int _minBorder = 1;
-    private int _maxBorder = 10;
+    private int _maxBorder = 15;
     [SerializeField]
     public int _maxEnemies;
     [SerializeField]
@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void Start()
     {
+        EventBus.Instance.Subscribe<KarmaChangedSignal>(OnKarmaChanged);
         _maxEnemies = _maxBorder;
         _currentIndex = _enemyUpgrades.Length - 1;
         _cameraWidth = _cameraTransform.GetComponent<Camera>().orthographicSize * _cameraTransform.GetComponent<Camera>().aspect;
@@ -50,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     }
     public void Update()
     {
-        if (_currentEnemies < _maxEnemies)
+        if (_currentEnemies < _minBorder || _currentEnemies < _maxEnemies)
         {
             _currentEnemies++;
             Vector2 randomPoint = new Vector2(Random.Range(_cameraWidth, _cameraWidth +0.05f ), Random.Range(_cameraWidth , _cameraWidth + 0.05f)) + new Vector2(_cameraTransform.position.x, _cameraTransform.position.y);
@@ -76,15 +77,12 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+    
+    
 
-    public void SetIndex(int value)
+    public void OnKarmaChanged(KarmaChangedSignal signal)
     {
-        var newIndex = Mathf.Min(value / 25, 3);
-        if (_currentIndex < newIndex)
-            _maxEnemies = Mathf.Max(_maxEnemies - 5, _minBorder);
-        if (_currentIndex > newIndex)
-            _maxEnemies = Mathf.Min(_maxEnemies + 5, _maxBorder);
-        _currentIndex = newIndex;
+        _currentIndex = signal.NewEnemyLevel;
     }
 
     public void AddMaxEnemies(int value)
