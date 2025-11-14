@@ -38,7 +38,10 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                EventBus.Instance.Invoke(new EndSignal());
+                if (EventBus.Instance != null)
+                {
+                    EventBus.Instance.Invoke(new EndSignal());
+                }
                 SceneManager.LoadScene(3);
             }
 

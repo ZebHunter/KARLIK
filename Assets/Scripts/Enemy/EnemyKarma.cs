@@ -12,6 +12,7 @@ public class EnemyKarma : MonoBehaviour
     private int _level = 3;
     public void ChangeLevel(int level) => _level = level;
     private bool _isEvolving = false;
+    private bool _scratch = false;
     private Dictionary<int, GameObject> _enemyUpgrade;
     
     void Start()
@@ -24,6 +25,7 @@ public class EnemyKarma : MonoBehaviour
     void OnEndSignal(EndSignal _)
     {
         _isEvolving = false;
+        _scratch = true;
         Destroy(gameObject);
     }
 
@@ -45,13 +47,12 @@ public class EnemyKarma : MonoBehaviour
     {
         EventBus.Instance.Unsubscribe<KarmaChangedSignal>(OnKarmaChanged);
         EventBus.Instance.Unsubscribe<EndSignal>(OnEndSignal);
-        
         if(_karmaPoints > 0)
         {
             SchoolGirlSpawner.GirlSpawned = false;
         }
 
-        if (!_isEvolving)
+        if (!_isEvolving && !_scratch)
         {
             EnemySpawner.Instance.Dead();
             KarmaSystem.Instance.GetKarmaChange(_karmaPoints);

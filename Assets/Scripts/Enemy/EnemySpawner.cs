@@ -70,6 +70,24 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private bool IsPositionInBorderZone(Vector3 position)
+    {
+        const int worldSize = 10;
+        const int chunkSize = 16;
+        int totalSize = worldSize * chunkSize;
+        int offset = totalSize / 2;
+        
+        float x = position.x;
+        float y = position.y;
+        
+        if (x <= -offset - 1 || x >= offset || y <= -offset - 1 || y >= offset)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
     public void Update()
     {
         if (_gameEnded) return;
@@ -78,32 +96,36 @@ public class EnemySpawner : MonoBehaviour
             _currentEnemies++;
             Vector2 randomPoint = new Vector2(Random.Range(_cameraWidth, _cameraWidth +0.05f ), Random.Range(_cameraWidth , _cameraWidth + 0.05f)) + new Vector2(_cameraTransform.position.x, _cameraTransform.position.y);
             var enemyPrefab = _enemyPrefabs[_currentIndex];
+            Vector3 spawnPosition = Vector3.zero;
             switch (Random.Range(0, 4))
             {
                 case 0:
                     randomPoint.x += _cameraWidth;
-                    var enemy0 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
-                    var karma0 = enemy0.GetComponent<EnemyKarma>();
-                    if (karma0 != null) karma0.ChangeLevel(_currentIndex);
+                    spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0);
                     break;
                 case 1:
                     randomPoint.x -= _cameraWidth;
-                    var enemy1 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
-                    var karma1 = enemy1.GetComponent<EnemyKarma>();
-                    if (karma1 != null) karma1.ChangeLevel(_currentIndex);
+                    spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0);
                     break;
                 case 2:
                     randomPoint.y += _cameraWidth;
-                    var enemy2 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
-                    var karma2 = enemy2.GetComponent<EnemyKarma>();
-                    if (karma2 != null) karma2.ChangeLevel(_currentIndex);
+                    spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0);
                     break;
                 case 3:
                     randomPoint.y -= _cameraWidth;
-                    var enemy3 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
-                    var karma3 = enemy3.GetComponent<EnemyKarma>();
-                    if (karma3 != null) karma3.ChangeLevel(_currentIndex);
+                    spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0);
                     break;
+            }
+            
+            if (!IsPositionInBorderZone(spawnPosition))
+            {
+                var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                var karma = enemy.GetComponent<EnemyKarma>();
+                karma.ChangeLevel(_currentIndex);
+            }
+            else
+            {
+                _currentEnemies--;
             }
         }
     }

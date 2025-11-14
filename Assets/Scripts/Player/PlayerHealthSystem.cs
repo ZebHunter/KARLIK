@@ -24,7 +24,10 @@ public class PlayerHealthSystem : MonoBehaviour
         _currentHealth = Mathf.Max(0, _currentHealth - damage);
         _healthBar.value = _currentHealth;
         if(_currentHealth <= 0){
-            EventBus.Instance.Invoke(new EndSignal());
+            if (EventBus.Instance != null)
+            {
+                EventBus.Instance.Invoke(new EndSignal());
+            }
             SceneManager.LoadScene(2);
         }
     }

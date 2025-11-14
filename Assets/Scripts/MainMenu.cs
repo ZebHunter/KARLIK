@@ -5,19 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneSequence
 {
-    // Загрузка обычных сцен
     public static void LoadScene(int index)
     {
         SceneManager.LoadScene("Scene" + index, LoadSceneMode.Single);
     }
 
-    // Загрузка сцены паузы поверх текущей
     public static void LoadPauseSceneAdditive()
     {
         SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
     }
 
-    // Возврат к предыдущей сцене
     public static void UnloadPauseScene()
     {
         SceneManager.UnloadSceneAsync("Pause");
@@ -37,9 +34,15 @@ public class MainMenu : MonoBehaviour
 
 	public void GoToMenu(){
 		Time.timeScale = 1;
-		if (EventBus.Instance != null)
+		try
 		{
-			EventBus.Instance.Invoke(new EndSignal());
+			if (EventBus.Instance != null)
+			{
+				EventBus.Instance.Invoke(new EndSignal());
+			}
+		}
+		catch
+		{
 		}
 		SceneManager.LoadScene(0);
 	}

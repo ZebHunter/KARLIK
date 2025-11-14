@@ -20,6 +20,19 @@ public class WeaponSystem : MonoBehaviour
 	public bool Melee => _type == WeaponType.Melee;
 	public bool Ranged => _type == WeaponType.Ranged;
 	public int Damage => _damage;
+    void Start()
+    {
+        EventBus.Instance.Subscribe<EndSignal>(OnEndSignal);
+    }
+
+    public void OnEndSignal(EndSignal signal){
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance.Unsubscribe<EndSignal>(OnEndSignal);
+    }
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
