@@ -8,17 +8,40 @@ public class EnemyMovement : MonoBehaviour
     private Collider2D _playerCollider;
     private Rigidbody2D _rigidbody;
     private Vector2 _playerPosition;
+    private bool _gameEnded = false;
     [SerializeField]
     private float _movementSpeed = 5f;
     
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _playerCollider = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).GetComponent<Collider2D>();
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _playerCollider = player.transform.GetChild(2).GetComponent<Collider2D>();
+        }
+        EventBus.Instance.Subscribe<EndSignal>(OnEndSignal);
+    }
+
+    void OnEndSignal(EndSignal _)
+    {
+        _gameEnded = true;
+        if (_rigidbody != null)
+        {
+            _rigidbody.velocity = Vector2.zero;
+        }
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance.Unsubscribe<EndSignal>(OnEndSignal);
     }
 
     void Update()
     {
+        if (_gameEnded) return;
+        if (_playerCollider == null) return;
+        
         _playerPosition = new Vector2(transform.position.x, transform.position.y);
         _movementDirection = Physics2D.ClosestPoint(transform.position, _playerCollider) - _playerPosition;
         _movementDirection.Normalize();

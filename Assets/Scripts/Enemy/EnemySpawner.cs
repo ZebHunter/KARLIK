@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform _cameraTransform;
 
     private int _currentEnemies = 0;
+    private bool _gameEnded = false;
 
     public Dictionary<int, GameObject> GetEnemies => _enemyPrefabs;
 
@@ -40,7 +41,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void Start()
     {
+        _gameEnded = false;
+        _currentEnemies = 0;
+        _maxBorder = 15;
         EventBus.Instance.Subscribe<KarmaChangedSignal>(OnKarmaChanged);
+        EventBus.Instance.Subscribe<EndSignal>(OnEndSignal);
         _maxEnemies = _maxBorder;
         _currentIndex = _enemyUpgrades.Length - 1;
         _cameraWidth = _cameraTransform.GetComponent<Camera>().orthographicSize * _cameraTransform.GetComponent<Camera>().aspect;
@@ -49,8 +54,25 @@ public class EnemySpawner : MonoBehaviour
             _enemyPrefabs[enemyData.priotity] = enemyData.enemy;
         }
     }
+
+    void OnEndSignal(EndSignal _)
+    {
+        _gameEnded = true;
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance.Unsubscribe<KarmaChangedSignal>(OnKarmaChanged);
+        EventBus.Instance.Unsubscribe<EndSignal>(OnEndSignal);
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     public void Update()
     {
+        if (_gameEnded) return;
         if (_currentEnemies < _minBorder || _currentEnemies < _maxEnemies)
         {
             _currentEnemies++;
@@ -60,19 +82,27 @@ public class EnemySpawner : MonoBehaviour
             {
                 case 0:
                     randomPoint.x += _cameraWidth;
-                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var enemy0 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var karma0 = enemy0.GetComponent<EnemyKarma>();
+                    if (karma0 != null) karma0.ChangeLevel(_currentIndex);
                     break;
                 case 1:
                     randomPoint.x -= _cameraWidth;
-                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var enemy1 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var karma1 = enemy1.GetComponent<EnemyKarma>();
+                    if (karma1 != null) karma1.ChangeLevel(_currentIndex);
                     break;
                 case 2:
                     randomPoint.y += _cameraWidth;
-                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var enemy2 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var karma2 = enemy2.GetComponent<EnemyKarma>();
+                    if (karma2 != null) karma2.ChangeLevel(_currentIndex);
                     break;
                 case 3:
                     randomPoint.y -= _cameraWidth;
-                    Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var enemy3 = Instantiate(enemyPrefab, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
+                    var karma3 = enemy3.GetComponent<EnemyKarma>();
+                    if (karma3 != null) karma3.ChangeLevel(_currentIndex);
                     break;
             }
         }

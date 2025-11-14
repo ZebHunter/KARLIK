@@ -10,7 +10,7 @@ public class EnemyKarma : MonoBehaviour
     [SerializeField]
     private bool AllowEvolving;
     private int _level = 3;
-    private void ChangeLevel(int level) => _level = level;
+    public void ChangeLevel(int level) => _level = level;
     private bool _isEvolving = false;
     private Dictionary<int, GameObject> _enemyUpgrade;
     
@@ -24,6 +24,7 @@ public class EnemyKarma : MonoBehaviour
     void OnEndSignal(EndSignal _)
     {
         _isEvolving = false;
+        Destroy(gameObject);
     }
 
     void OnKarmaChanged(KarmaChangedSignal signal)
@@ -36,8 +37,8 @@ public class EnemyKarma : MonoBehaviour
         _isEvolving = true;
         EventBus.Instance.Unsubscribe<KarmaChangedSignal>(OnKarmaChanged);
         Destroy(gameObject);
-        var newPidor = Instantiate(_enemyUpgrade[targetLevel], transform.position, Quaternion.identity);
-        newPidor.GetComponent<EnemyKarma>().ChangeLevel(targetLevel);
+        var newEnemy = Instantiate(_enemyUpgrade[targetLevel], transform.position, Quaternion.identity);
+        newEnemy.GetComponent<EnemyKarma>().ChangeLevel(targetLevel);
     }
 
     void OnDestroy()

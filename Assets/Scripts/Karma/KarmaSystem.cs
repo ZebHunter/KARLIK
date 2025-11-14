@@ -17,6 +17,11 @@ public class KarmaSystem : MonoBehaviour
         _currentCount = 100;
     }
 
+    void OnDestroy()
+    {
+        Instance = null;
+    }
+
     public void GetKarmaChange(int change)
     {
         _currentCount = Mathf.Max(0, _currentCount + change);

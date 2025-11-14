@@ -8,6 +8,12 @@ public class SchoolGirlSpawner : MonoBehaviour
     public static bool AllowSpawning {get; set;}
     public static bool GirlSpawned {get; set;}
 
+    void Start()
+    {
+        AllowSpawning = false;
+        GirlSpawned = false;
+    }
+
     void Update()
     {
         if(AllowSpawning && !GirlSpawned && Timer.Instance.GameTime % 30  == 0){
