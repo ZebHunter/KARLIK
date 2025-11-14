@@ -36,6 +36,11 @@ public class MainMenu : MonoBehaviour
     }
 
 	public void GoToMenu(){
+		Time.timeScale = 1;
+		if (EventBus.Instance != null)
+		{
+			EventBus.Instance.Invoke(new EndSignal());
+		}
 		SceneManager.LoadScene(0);
 	}
 
